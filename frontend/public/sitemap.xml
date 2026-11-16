@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Relative locs are rewritten to the production domain at deploy time; no host is assumed here. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>/</loc></url>
+  <url><loc>/menu</loc></url>
+  <url><loc>/reserve</loc></url>
+  <url><loc>/story</loc></url>
+  <url><loc>/visit</loc></url>
+  <url><loc>/ideas</loc></url>
+  <url><loc>/gallery</loc></url>
+  <url><loc>/near/fergusson-college</loc></url>
+  <url><loc>/near/jm-road</loc></url>
+  <url><loc>/near/deccan-gymkhana</loc></url>
+  <url><loc>/near/model-colony</loc></url>
+  <url><loc>/near/shivajinagar</loc></url>
+  <url><loc>/near/prabhat-road</loc></url>
+</urlset>
