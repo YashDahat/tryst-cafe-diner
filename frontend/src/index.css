@@ -1,0 +1,110 @@
+/* design: concept=machiai-x-puneri-katta; palette=washi#F3EFE4/night#18201B/moss#3F5247/terracotta#A9542A/ember#D98B55; display=Yatra One; body=Mukta; hero=offset-collage-with-katta-ledge; signature-motion=two-strokes-meet-in-hanko */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand tokens (HSL triplets). washi #F3EFE4, moss #3F5247, night #18201B, terracotta #A9542A, ember #D98B55, marigold #E2A33B */
+    --washi: 44 36% 92%;
+    --moss: 144 13% 28%;
+    --night: 144 14% 11%;
+    --terra: 20 60% 41%;
+    --ember: 24 65% 58%;
+    --marigold: 38 74% 55%;
+    --veg: 134 61% 30%;
+    --nonveg: 18 61% 30%;
+
+    --background: 44 36% 92%;
+    --foreground: 97 13% 14%;
+    --card: 44 50% 97%;
+    --card-foreground: 97 13% 14%;
+    --popover: 44 50% 97%;
+    --popover-foreground: 97 13% 14%;
+    --primary: 144 13% 28%;
+    --primary-foreground: 44 50% 97%;
+    --secondary: 44 28% 86%;
+    --secondary-foreground: 97 13% 14%;
+    --muted: 44 28% 88%;
+    --muted-foreground: 96 6% 33%;
+    --accent: 44 30% 85%;
+    --accent-foreground: 97 13% 14%;
+    --destructive: 0 65% 38%;
+    --destructive-foreground: 44 50% 97%;
+    --border: 44 14% 74%;
+    --input: 44 14% 62%;
+    --ring: 20 60% 41%;
+    --radius: 2px;
+  }
+  .dark {
+    --background: 144 14% 11%;
+    --foreground: 44 36% 92%;
+    --card: 144 12% 15%;
+    --card-foreground: 44 36% 92%;
+    --popover: 144 12% 15%;
+    --popover-foreground: 44 36% 92%;
+    --primary: 24 65% 58%;
+    --primary-foreground: 144 14% 11%;
+    --secondary: 144 10% 20%;
+    --secondary-foreground: 44 36% 92%;
+    --muted: 144 10% 18%;
+    --muted-foreground: 44 12% 72%;
+    --accent: 144 10% 22%;
+    --accent-foreground: 44 36% 92%;
+    --destructive: 0 70% 62%;
+    --destructive-foreground: 144 14% 11%;
+    --border: 144 8% 30%;
+    --input: 144 8% 40%;
+    --ring: 24 65% 58%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground font-sans;
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.6;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  }
+  h1, h2, h3, .font-display { font-family: 'Yatra One', 'Mukta', serif; font-weight: 400; line-height: 1.05; letter-spacing: 0.005em; }
+  :focus-visible { outline: 3px solid hsl(var(--ring)); outline-offset: 2px; }
+  /* The foundation header's wordmark picks up the brush display face (theming hook; no shell edit). */
+  header a.font-bold span { font-family: 'Yatra One', 'Mukta', serif; font-weight: 400; letter-spacing: 0.06em; }
+}
+
+@layer components {
+  .ma { padding-block: clamp(64px, 9vw, 104px); }
+  .rule { border-top: 1px solid hsl(var(--border)); }
+  .grid-wrap { @apply mx-auto w-full max-w-6xl px-4; }
+  .chapter-no { font-family: 'Yatra One', serif; font-size: 48px; line-height: 1; color: hsl(var(--terra)); }
+  .dark .chapter-no, .on-night .chapter-no { color: hsl(var(--ember)); }
+  .btn-terra { @apply inline-flex min-h-[44px] items-center justify-center gap-2 bg-terra px-6 font-medium text-white transition-transform duration-200 hover:-translate-y-0.5; }
+  .btn-ink { @apply inline-flex min-h-[44px] items-center justify-center gap-2 border border-foreground px-6 font-medium transition-colors duration-200 hover:bg-foreground hover:text-background; }
+  .on-night { background: hsl(var(--night)); color: hsl(var(--washi)); }
+  .on-night .text-muted-foreground { color: #B9B4A6; }
+  .ledge { background: hsl(var(--moss)); color: hsl(var(--washi)); }
+  .perforated { background-image: radial-gradient(circle at 0 50%, hsl(var(--background)) 7px, transparent 8px), radial-gradient(circle at 100% 50%, hsl(var(--background)) 7px, transparent 8px); background-size: 51% 20px; background-repeat: repeat-y; background-position: left, right; }
+}
+
+/* ── Motion: transform/opacity only, 200-700ms. Content is visible unless JS opts in (html.js-motion). ── */
+html.js-motion .reveal { opacity: 0; transform: translateY(16px); transition: opacity 400ms ease-out, transform 400ms ease-out; }
+html.js-motion .reveal.is-in { opacity: 1; transform: none; }
+html.js-motion .timeline-line { transform: scaleY(0); transform-origin: top; transition: transform 600ms ease-out; }
+html.js-motion .is-in .timeline-line, html.js-motion .timeline-line.is-in { transform: scaleY(1); }
+.stroke-l { animation: stroke-l 700ms ease-out both; }
+.stroke-r { animation: stroke-r 700ms ease-out both; }
+.hanko-land { animation: hanko 250ms ease-out 500ms both; }
+.stamp-press { animation: hanko 250ms ease-out both; }
+@keyframes stroke-l { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: none; } }
+@keyframes stroke-r { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: none; } }
+@keyframes hanko { from { opacity: 0; transform: scale(1.18) rotate(-6deg); } to { opacity: 1; transform: scale(1) rotate(-3deg); } }
+.stage-dot { transition: transform 300ms ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js-motion .reveal, html.js-motion .timeline-line { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .stroke-l, .stroke-r, .hanko-land, .stamp-press, .stage-dot { animation: none !important; transition: none !important; }
+}
